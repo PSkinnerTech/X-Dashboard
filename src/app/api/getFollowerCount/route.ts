@@ -14,10 +14,7 @@ export async function GET() {
     const me = await client.v2.me({ 'user.fields': ['public_metrics'] });
     console.log('User data fetched:', me);
 
-    const followerCount = me.data.public_metrics?.followers_count || 0;
-    console.log('Follower count:', followerCount);
-
-    return NextResponse.json({ followerCount });
+    return NextResponse.json({ data: me.data });
   } catch (error) {
     console.error('Error fetching user data:', error);
     return NextResponse.json({ error: 'Error fetching user data' }, { status: 500 });
