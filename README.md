@@ -1,37 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# X Follower Count
+
+This project demonstrates how to use the X API (formerly Twitter API) to fetch the follower count of your own account. It's a simple Next.js application that serves as a learning tool for developers looking to integrate the X API into their projects.
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+
+1. Node.js installed on your machine
+2. A X Developer account (you can sign up at [https://developer.x.com](https://developer.x.com))
+3. Basic (free) plan access to the X API
+4. An app created in the X Developer Portal with the following credentials:
+   - API Key
+   - API Secret
+   - Access Token
+   - Access Secret
 
 ## Getting Started
 
-First, run the development server:
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/x-follower-count.git
+   cd x-follower-count
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Install dependencies:
+   ```
+   bun install
+   ```
+   Note: This project uses Bun, but you can also use npm, yarn, or pnpm if you prefer.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Create a `.env.local` file in the root directory and add your X API credentials:
+   ```
+   X_API_KEY=your_api_key
+   X_API_SECRET=your_api_secret
+   X_ACCESS_TOKEN=your_access_token
+   X_ACCESS_SECRET=your_access_secret
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Start the development server:
+   ```
+   bun run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+The application provides a simple interface with a button to fetch your X account's follower count. Click the "Get My Follower Count" button to retrieve and display the number of followers for the account associated with your API credentials.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Understanding the X API Free Plan
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project utilizes the following endpoints from the X API Free Plan:
 
-## Deploy on Vercel
+### Users Lookup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Endpoint: `GET /2/users/me`
+- Rate Limit: 25 requests / 24 hours (PER USER)
+- No tweet cap or special attributes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# X-Dashboard
+### Creating and Deleting Tweets
+
+While this project doesn't implement tweet creation or deletion, you can find more information about these features in the X API documentation:
+[Manage Tweets Introduction](https://developer.x.com/en/docs/x-api/tweets/manage-tweets/introduction)
+
+## Project Structure
+
+- `src/app/page.tsx`: The main React component that handles the UI and API requests.
+- `src/app/api/getFollowerCount/route.ts`: The API route that interacts with the X API to fetch the follower count.
+- `next.config.mjs`: Configuration file for Next.js, including environment variable setup.
+
+## Learning Objectives
+
+This project serves as a starting point for developers to:
+
+1. Understand how to set up and use the X API with a free plan.
+2. Learn about API rate limits and how to work within them.
+3. Implement a simple Next.js application with API routes.
+4. Handle authentication and secure API key usage in a web application.
+
+## Further Development
+
+You can extend this project by:
+
+- Adding more X API endpoints to fetch additional user data.
+- Implementing tweet posting functionality.
+- Creating a more comprehensive dashboard for X account statistics.
+
+## Resources
+
+- [X API Documentation](https://developer.x.com/en/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Bun Documentation](https://bun.sh/docs)
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
