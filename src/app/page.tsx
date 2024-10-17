@@ -25,7 +25,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const response = await fetch('/api/getFollowerCount');
+      const response = await fetch('/api/getUserData');
       const result = await response.json();
       console.log('Fetched data:', result);
 

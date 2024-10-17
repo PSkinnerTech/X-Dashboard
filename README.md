@@ -1,6 +1,6 @@
-# X Follower Count
+# X Profile Dashboard
 
-This project demonstrates how to use the X API (formerly Twitter API) to fetch the follower count of your own account. It's a simple Next.js application that serves as a learning tool for developers looking to integrate the X API into their projects.
+This project demonstrates how to use the X API (formerly Twitter API) to fetch and display your own account's profile data. It's a simple Next.js application that serves as a learning tool for developers looking to integrate the X API into their projects.
 
 ## Prerequisites
 
@@ -19,8 +19,8 @@ Before you begin, ensure you have the following:
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/x-follower-count.git
-   cd x-follower-count
+   git clone https://github.com/yourusername/x-profile-dashboard.git
+   cd x-profile-dashboard
    ```
 
 2. Install dependencies:
@@ -46,27 +46,35 @@ Before you begin, ensure you have the following:
 
 ## Usage
 
-The application provides a simple interface with a button to fetch your X account's follower count. Click the "Get My Follower Count" button to retrieve and display the number of followers for the account associated with your API credentials.
+The application provides a simple interface with a button to fetch your X account's profile data. Here's how to use it:
+
+1. Click the "Get My Profile Data" button.
+2. The application will fetch your profile data from the X API.
+3. Once loaded, you'll see a dashboard displaying the following information:
+   - Your display name
+   - Your username (handle)
+   - Follower count
+   - Following count
+   - Tweet count
+   - Number of lists you're on
+   - Like count
+
+This dashboard gives you a quick overview of your X account's key metrics.
 
 ## Understanding the X API Free Plan
 
-This project utilizes the following endpoints from the X API Free Plan:
+This project utilizes the following endpoint from the X API Free Plan:
 
-### Users Lookup
+### User Lookup
 
 - Endpoint: `GET /2/users/me`
 - Rate Limit: 25 requests / 24 hours (PER USER)
-- No tweet cap or special attributes
-
-### Creating and Deleting Tweets
-
-While this project doesn't implement tweet creation or deletion, you can find more information about these features in the X API documentation:
-[Manage Tweets Introduction](https://developer.x.com/en/docs/x-api/tweets/manage-tweets/introduction)
+- Fields retrieved: id, name, username, public_metrics (followers_count, following_count, tweet_count, listed_count, like_count)
 
 ## Project Structure
 
 - `src/app/page.tsx`: The main React component that handles the UI and API requests.
-- `src/app/api/getFollowerCount/route.ts`: The API route that interacts with the X API to fetch the follower count.
+- `src/app/api/getUserData/route.ts`: The API route that interacts with the X API to fetch the user data.
 - `next.config.mjs`: Configuration file for Next.js, including environment variable setup.
 
 ## Learning Objectives
@@ -77,14 +85,25 @@ This project serves as a starting point for developers to:
 2. Learn about API rate limits and how to work within them.
 3. Implement a simple Next.js application with API routes.
 4. Handle authentication and secure API key usage in a web application.
+5. Display and format user data from the X API.
 
-## Further Development
+## Customization and Further Development
 
 You can extend this project by:
 
-- Adding more X API endpoints to fetch additional user data.
-- Implementing tweet posting functionality.
-- Creating a more comprehensive dashboard for X account statistics.
+1. Adding error handling for rate limit exceeded scenarios.
+2. Implementing caching to store the data and reduce API calls.
+3. Adding more X API endpoints to fetch additional user data or tweets.
+4. Creating a more comprehensive dashboard with data visualization.
+5. Implementing user authentication to allow multiple users to view their own data.
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. Ensure your X API credentials are correct in the `.env.local` file.
+2. Check the console logs in your browser's developer tools for any error messages.
+3. Verify that you haven't exceeded the API rate limits.
 
 ## Resources
 
