@@ -1,17 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface UserData {
   id: string;
   name: string;
   username: string;
+  profile_image_url: string;
+  profile_banner_url?: string;
+  description?: string;
   public_metrics: {
     followers_count: number;
     following_count: number;
     tweet_count: number;
     listed_count: number;
-    like_count: number;
   };
 }
 
@@ -25,7 +28,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const response = await fetch('/api/getFollowerCount');
+      const response = await fetch('/api/getUserData');
       const result = await response.json();
       console.log('Fetched data:', result);
 
@@ -57,14 +60,38 @@ export default function Home() {
         {error && <p className="text-red-500 mt-4">{error}</p>}
         {userData && (
           <div className="mt-4">
-            <p className="text-lg font-bold text-black">{userData.name}</p>
-            <p className="text-gray-300">@{userData.username}</p>
+            {userData.profile_banner_url && (
+              <div className="relative w-full h-32 mb-4">
+                <Image
+                  src={userData.profile_banner_url}
+                  alt="Profile Banner"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t-lg"
+                />
+              </div>
+            )}
+            <div className="flex items-center mb-4">
+              <Image
+                src={userData.profile_image_url.replace('_normal', '')}
+                alt="Profile Picture"
+                width={64}
+                height={64}
+                className="rounded-full mr-4"
+              />
+              <div>
+                <p className="text-lg font-bold text-black">{userData.name}</p>
+                <p className="text-gray-300">@{userData.username}</p>
+              </div>
+            </div>
+            {userData.description && (
+              <p className="text-gray-600 mb-4">{userData.description}</p>
+            )}
             <ul className="mt-2 space-y-1 text-gray-500">
               <li>Followers: <span className="font-bold">{userData.public_metrics.followers_count}</span></li>
               <li>Following: <span className="font-bold">{userData.public_metrics.following_count}</span></li>
               <li>Tweets: <span className="font-bold">{userData.public_metrics.tweet_count}</span></li>
               <li>Listed: <span className="font-bold">{userData.public_metrics.listed_count}</span></li>
-              <li>Likes: <span className="font-bold">{userData.public_metrics.like_count}</span></li>
             </ul>
           </div>
         )}

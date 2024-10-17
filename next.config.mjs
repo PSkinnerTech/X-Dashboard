@@ -7,6 +7,9 @@ const nextConfig = {
       X_ACCESS_TOKEN: process.env.X_ACCESS_TOKEN,
       X_ACCESS_SECRET: process.env.X_ACCESS_SECRET,
     },
+    images: {
+      domains: ['pbs.twimg.com'],
+    },
   }
   
   export default nextConfig;
